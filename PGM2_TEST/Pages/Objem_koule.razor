@@ -1,0 +1,108 @@
+﻿@page "/objem_koule"
+
+<PageTitle>Výpočet objemu, povrchu koule</PageTitle>
+
+<h3 class="font-monospace">Objem, povrch koule</h3>
+
+<div class="p-1 m-1">
+    <p class="m-0 p-1">Poloměr:</p>
+    <label><input type="number" @bind="koule.Polomer"/></label>
+    <p class="m-0 p-1">Povrch koule:</p>
+    <p class="border-black border-1 bg-light p-1"> @Math.Round(koule.Povrch, 2)</p>
+    <p class="m-0 p-1">Objem koule:</p>
+    <p class="border-black border-1 bg-light p-1"> @Math.Round(koule.Objem, 2)</p>
+</div>
+<div class="">
+    <p>Povrch koule je menší o @Mensi_Povrch</p>
+    <p>Objem koule je menši o @Mensi_Objem</p>
+</div>
+
+<div class="p-1 m-1">
+    <p class="m-0 p-1">Poloměr:</p>
+    <label><input type="number" @bind="koule_2.Polomer" /></label>
+    <p class="m-0 p-1">Povrch koule:</p>
+    <p class="border-black border-1 bg-light p-1 m-1"> @Math.Round(koule_2.Povrch, 2)</p>
+    <p class="m-0 p-1">Objem koule:</p>
+    <p class="border-black border-1 bg-light p-1 m-1"> @Math.Round(koule_2.Objem, 2)</p>
+</div>
+<div class="end-100">
+    <p>Povrch koule 2 je větší o @Vetsi_Povrch</p>
+    <p>Objem koule 2 je větší o @Vetsi_Objem</p>
+</div>
+
+@code{
+    private Models.Koule koule = new Models.Koule();
+    private Models.Koule_2 koule_2 = new Models.Koule_2();
+ 
+    public double Mensi_Povrch {
+        get {
+            if (koule.Povrch < koule_2.Povrch)
+            {
+                return Math.Round(koule_2.Povrch - koule.Povrch, 2);
+            }
+            else
+            {
+                return 0;
+            }
+    } set{
+            Mensi_Povrch = value;
+        }
+    }
+
+    public double Mensi_Objem
+    {
+        get
+        {
+            if (koule.Objem < koule_2.Objem)
+            {
+                return Math.Round(koule_2.Objem - koule.Objem, 2);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        set
+        {
+            Mensi_Objem = value;
+        }
+    }
+
+    public double Vetsi_Objem
+    {
+        get
+        {
+            if (koule_2.Objem > koule.Objem)
+            {
+                return Math.Round(koule_2.Objem - koule.Objem, 2);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        set
+        {
+            Vetsi_Objem = value;
+        }
+    }
+
+    public double Vetsi_Povrch
+    {
+        get
+        {
+            if (koule_2.Povrch > koule.Povrch)
+            {
+                return Math.Round(koule_2.Povrch - koule.Povrch, 2);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        set
+        {
+            Vetsi_Povrch = value;
+        }
+    }
+}
